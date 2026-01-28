@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<<meta name="google-site-verification" content="vW7C_okcPQkkIlv3NRlm52WoJqfVM27Fi2PDBq__v7s" />>
+<head><meta name="google-site-verification" content="vW7C_okcPQkkIlv3NRlm52WoJqfVM27Fi2PDBq__v7s" />
 <meta charset="UTF-8">
 <title>SMRStore EAFC Coins</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,9 @@ button:hover{background:#ffc107;}
 </select>
 
 <label>Select Amount</label>
-<select id="quantity" onchange="updatePriceDropdown()"></select>
+<select id="quantity" onchange="updatePriceDropdown()">
+<!-- الخيارات سيتم توليدها ديناميكي -->
+</select>
 
 <div class="price" id="p">Price: 1.75€</div>
 
@@ -106,6 +108,7 @@ button:hover{background:#ffc107;}
 </div>
 
 <script>
+// Multi-language text
 const text={en:{title:"SMRStore EAFC Coins",subtitle:"Buy FC coins quickly and safely",platform:"Select Platform",btn:"Contact to Complete Order"},
 ar:{title:"متجر SMRStore",subtitle:"شراء العملات بسرعة وأمان",platform:"اختر المنصة",btn:"تواصل لإتمام الطلب"},
 es:{title:"SMRStore Monedas EAFC",subtitle:"Compra rápida y segura",platform:"Seleccionar plataforma",btn:"Contactar"},
@@ -122,14 +125,15 @@ document.querySelector("button").innerText=text[l].btn;
 updatePriceDropdown();
 }
 
-// توليد خيارات الكمية
+// توليد خيارات الكمية ديناميكي
 function generateQuantityOptions(){
     const select = document.getElementById("quantity");
     const options = [50000,100000,200000,300000,500000,1000000,3000000,5000000,10000000,20000000];
-    select.innerHTML='';
+    select.innerHTML = '';
     for(let i=0;i<options.length;i++){
         let val = options[i];
-        let text = (val>=1000000)?(val/1000000)+'M':(val/1000)+'K';
+        let text = '';
+        if(val>=1000000){text = (val/1000000)+'M';} else {text = (val/1000)+'K';}
         let opt = document.createElement('option');
         opt.value = val;
         opt.text = text;
@@ -137,13 +141,16 @@ function generateQuantityOptions(){
     }
 }
 
+// تحديث السعر عند اختيار كمية
 function updatePriceDropdown(){
     let q = parseInt(document.getElementById("quantity").value);
-    let price = (q/100000)*3.5;
+    let price = (q / 100000)*3.5;
     document.getElementById("p").innerText = "Price: "+price.toFixed(2)+"€";
 }
 
-function send(){window.open("https://linktr.ee/riaduus3","_blank");}
+function send(){
+    window.open("https://linktr.ee/riaduus3","_blank");
+}
 
 generateQuantityOptions();
 updatePriceDropdown();
