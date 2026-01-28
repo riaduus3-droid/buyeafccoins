@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SMRStore EAFC Coins</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Roboto',sans-serif;background:linear-gradient(135deg,#0b1c2d,#162b45);color:white;}
+header{background:#091725;text-align:center;padding:25px;font-family:'Orbitron',sans-serif;color:#ffcc00;}
+header h1{font-size:36px;margin:0;}
+header p{font-size:18px;}
+.container{max-width:1000px;margin:auto;padding:20px;}
+.box{background:rgba(0,0,0,0.6);padding:25px;border-radius:15px;box-shadow:0 0 15px black;margin-bottom:20px;}
+label{display:block;margin-top:15px;font-size:18px;font-weight:bold;}
+select{width:100%;padding:12px;border-radius:8px;border:none;margin-top:5px;font-size:16px;}
+button{width:100%;padding:15px;font-size:20px;background:#ff9800;color:white;border:none;border-radius:10px;cursor:pointer;margin-top:20px;}
+button:hover{background:#ffc107;}
+.price{font-size:24px;color:#00ff99;margin-top:15px;}
+.links{text-align:center;margin-top:15px;}
+.links a{color:#ffcc00;font-size:20px;text-decoration:none;font-weight:bold;}
+.lang{text-align:center;margin-bottom:20px;}
+.lang button{background:#223b5c;border:none;color:white;padding:6px 12px;margin:5px;border-radius:5px;}
+.info{background:rgba(255,255,255,0.05);padding:25px;border-radius:15px;margin-top:30px;line-height:1.7;font-size:15px;}
+.info h2{color:#ffcc00;text-align:center;}
+.info h3{color:#00ff99;}
+</style>
+</head>
+<body>
+
+<header>
+<h1 id="title">SMRStore EAFC Coins</h1>
+<p id="subtitle">Buy FC coins quickly and safely</p>
+</header>
+
+<div class="container">
+
+<div class="lang">
+<button onclick="setLang('en')">English</button>
+<button onclick="setLang('ar')">العربية</button>
+<button onclick="setLang('es')">Español</button>
+<button onclick="setLang('de')">Deutsch</button>
+</div>
+
+<div class="box">
+
+<label id="platformLabel">Select Platform</label>
+<select>
+<option>PlayStation</option>
+<option>Xbox</option>
+<option>PC</option>
+</select>
+
+<label>Select Amount</label>
+<select id="quantity" onchange="updatePriceDropdown()"></select>
+
+<div class="price" id="p">Price: 1.75€</div>
+
+<button onclick="send()">Contact to Complete Order</button>
+
+<div class="links">
+<a href="https://linktr.ee/riaduus3" target="_blank">📱 Complete Purchase</a>
+</div>
+
+</div>
+
+<div class="info">
+<h2>FC 26 Coins Purchase Information</h2>
+<p>Buy FC 26 Coins now on <b>SMRStore</b>! No need to grind it yourself, you can quickly acquire the FC coins you need.</p>
+<p>SMRStore Team guarantees safe and professional market trading methods, an efficient delivery process, and low FC Coin prices.</p>
+
+<h3>Delivery Method</h3>
+<p>Comfort Trade</p>
+
+<h3>Information Required</h3>
+<ul>
+<li>EA FC 26 account</li>
+<li>EA FC 26 password</li>
+<li>Valid Backup Codes</li>
+</ul>
+
+<h3>Delivery Time</h3>
+<ul>
+<li>Below 500K: 1h20m - 1h40m</li>
+<li>500K - 1M: 1h30m - 2h</li>
+<li>1M - 2M: 2 - 3h</li>
+<li>2M - 5M: 3 - 5h</li>
+<li>5M - 10M: 5 - 9h</li>
+<li>10M - 20M+: 7 - 13h+</li>
+</ul>
+
+<h3>Precautions Before Purchase</h3>
+<ul>
+<li>Unlock Transfer Market first</li>
+<li>Minimum 3000 coins required</li>
+<li>Avoid cross-platform purchases</li>
+<li>No login during transaction</li>
+<li>Change password after delivery</li>
+</ul>
+
+<h3>Backup Codes</h3>
+<p>How to Get FC 26 Backup Codes:<br>
+<a href="https://share.google/aimode/HyYHJmpkuIkWJ01lp" target="_blank" style="color:#ffcc00;">Click Here</a></p>
+</div>
+
+</div>
+
+<script>
+const text={en:{title:"SMRStore EAFC Coins",subtitle:"Buy FC coins quickly and safely",platform:"Select Platform",btn:"Contact to Complete Order"},
+ar:{title:"متجر SMRStore",subtitle:"شراء العملات بسرعة وأمان",platform:"اختر المنصة",btn:"تواصل لإتمام الطلب"},
+es:{title:"SMRStore Monedas EAFC",subtitle:"Compra rápida y segura",platform:"Seleccionar plataforma",btn:"Contactar"},
+de:{title:"SMRStore EAFC Münzen",subtitle:"Schnell und sicher kaufen",platform:"Plattform wählen",btn:"Kontaktieren"}};
+
+let lang="en";
+
+function setLang(l){
+lang=l;
+document.getElementById("title").innerText=text[l].title;
+document.getElementById("subtitle").innerText=text[l].subtitle;
+document.getElementById("platformLabel").innerText=text[l].platform;
+document.querySelector("button").innerText=text[l].btn;
+updatePriceDropdown();
+}
+
+// توليد خيارات الكمية
+function generateQuantityOptions(){
+    const select = document.getElementById("quantity");
+    const options = [50000,100000,200000,300000,500000,1000000,3000000,5000000,10000000,20000000];
+    select.innerHTML='';
+    for(let i=0;i<options.length;i++){
+        let val = options[i];
+        let text = (val>=1000000)?(val/1000000)+'M':(val/1000)+'K';
+        let opt = document.createElement('option');
+        opt.value = val;
+        opt.text = text;
+        select.appendChild(opt);
+    }
+}
+
+function updatePriceDropdown(){
+    let q = parseInt(document.getElementById("quantity").value);
+    let price = (q/100000)*3.5;
+    document.getElementById("p").innerText = "Price: "+price.toFixed(2)+"€";
+}
+
+function send(){window.open("https://linktr.ee/riaduus3","_blank");}
+
+generateQuantityOptions();
+updatePriceDropdown();
+</script>
+
+</body>
+</html>
